@@ -4,11 +4,6 @@ from timer_gui import TimerApp
 import threading
 from threading import Event
 
-# Change name here only
-csv_title = 'scraped_data.csv'
-# Change frequency here only
-scraping_frequency = 10000 #milliseconds
-
 def create_url_gui(event):
     app = App(event)
     app.mainloop()
