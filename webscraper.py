@@ -1,5 +1,3 @@
-import time
-
 from bs4 import BeautifulSoup
 #Using Selenium3 due to being on windows
 from webdriver_manager.chrome import ChromeDriverManager
