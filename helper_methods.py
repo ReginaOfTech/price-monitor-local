@@ -16,8 +16,10 @@ total_rows = 0
 cur_row_pos = 1
 
 def calc_total_rows():
+    total = 0
     with open(get_csv_name()) as f:
-        return int(sum(1 for line in f) / 2) - 1
+        total = int(sum(1 for line in f) / 2) - 1
+    return total
 
 def get_csv_name():
     return csv_title
