@@ -10,13 +10,14 @@ class App(tk.Tk):
     def output_data(self, url, title, price):
         # Output data to the csv
         try:
+            file_name = helper_methods.get_csv_name()
             # Default to create and write to file
             action = 'w'
             # If csv is present then append
-            if os.path.exists(self.csv_title):
+            if os.path.exists(file_name):
                 action = 'a'
             data = [title, price, url]
-            with open(self.csv_title, action) as file:
+            with open(file_name, action) as file:
                 write = csv.writer(file)
                 # If csv is new then need to insert header line
                 if action == 'w':
@@ -46,7 +47,7 @@ class App(tk.Tk):
         self.title('Price Monitor')
 
         # initialize website data
-        self.websites = ('amazon') #, 'walmart', 'bath and body works', etc)
+        self.websites = ['amazon'] #, 'walmart', 'bath and body works', etc)
 
         # set up variable
         self.option_var = tk.StringVar(self)
@@ -127,7 +128,10 @@ class App(tk.Tk):
         # User is ready to run program.
         # Leave to create timer_gui
         if os.path.exists(helper_methods.get_csv_name()):
-            if helper_methods.calc_total_rows() > 1: # First row is header line
+            if helper_methods.calc_total_rows() >= 1: # First row is header line
                 self.destroy()
-
-        messagebox.showwarning(title="Missing Data", message="You are not following any products! Please add urls.")
+            else:
+                messagebox.showwarning(title="Missing Data",
+                                       message="You are not following any products! Please add urls.")
+        else:
+            messagebox.showwarning(title="Missing Data", message="You are not following any products! Please add urls.")
